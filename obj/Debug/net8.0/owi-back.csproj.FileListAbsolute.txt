@@ -135,3 +135,8 @@ C:\wamp64\www\owi\owi-back\bin\Debug\net8.0\runtimes\win\lib\net6.0\System.Windo
 C:\wamp64\www\owi\owi-back\obj\Debug\net8.0\owi-back.csproj.AssemblyReference.cache
 C:\wamp64\www\owi\owi-back\obj\Debug\net8.0\owi-back.sourcelink.json
 C:\wamp64\www\owi\owi-back\obj\Debug\net8.0\owi-back.csproj.Up2Date
+C:\wamp64\www\owi\owi-back\bin\Debug\net8.0\Microsoft.OpenApi.dll
+C:\wamp64\www\owi\owi-back\bin\Debug\net8.0\Swashbuckle.AspNetCore.Swagger.dll
+C:\wamp64\www\owi\owi-back\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerGen.dll
+C:\wamp64\www\owi\owi-back\bin\Debug\net8.0\Swashbuckle.AspNetCore.SwaggerUI.dll
+C:\wamp64\www\owi\owi-back\obj\Debug\net8.0\owi-back.MvcApplicationPartsAssemblyInfo.cs
