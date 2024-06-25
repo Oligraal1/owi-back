@@ -1,62 +1,63 @@
-// using System.Diagnostics;
-// using Microsoft.AspNetCore.Mvc;
-// using owi_back.Models;
+using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using owi_back.Models;
 
-// namespace owi_back.DAO;
+namespace owi_back.DAO;
 
 
-// public class CommentDAO
-// {
-//     private readonly Context _context;
+public class CommentDAO
+{
+    private readonly OwidbContext _context;
 
-//     public CommentDAO(Context context)
-//     {
-//         _context = context;
-//     }
+    public CommentDAO(OwidbContext context)
+    {
+        _context = context;
+    }
 
-//     public async Task<IEnumerable<CommentDAO>> GetCommentDAOs()
-//     {
-//         return await _context.CommentDAOs.ToListAsync();
-//     }
+    public async Task<IEnumerable<Comment>> GetComments()
+    {
+        return await _context.Comments.ToListAsync();
+    }
 
-//     public async Task<CommentDAO> GetCommentDAO(int id)
-//     {
-//         return await _context.CommentDAOs.FindAsync(id);
-//     }
+    public async Task<Comment> GetCommentDAO(int id)
+    {
+        return await _context.Comments.FindAsync(id);
+    }
 
-//     public async Task<CommentDAO> AddCommentDAO(CommentDAO CommentDAO)
-//     {
-//         _context.CommentDAOs.Add(CommentDAO);
-//         await _context.SaveChangesAsync();
+    public async Task<Comment> AddComment(Comment comment)
+    {
+        _context.Comments.Add(comment);
+        await _context.SaveChangesAsync();
 
-//         if (CommentDAO.taskId != 0)
-//         {
-//             var task = await _context
-//                 .tasks.Include(p => p.CommentDAOs)
-//                 .FirstOrDefaultAsync(p => p.taskId == CommentDAO.taskId.Value);
+        if (comment.Id != 0)
+        {
+            var task = await _context
+                .Tasks.Include(p => p.Comments)
+                .FirstOrDefaultAsync(p => p.Id == comment.Id);
 
-//             task.CommentDAOs.Add(CommentDAO);
-//         }
-//         await _context.SaveChangesAsync();
+            task.Comments.Add(comment);
+        }
+        await _context.SaveChangesAsync();
 
-//         return CommentDAO;
-//     }
+        return comment;
+    }
 
-//     public async Task<CommentDAO> UpdateCommentDAO(CommentDAO CommentDAO)
-//     {
-//         _context.Entry(CommentDAO).State = EntityState.Modified;
-//         await _context.SaveChangesAsync();
-//         return CommentDAO;
-//     }
+    public async Task<Comment> UpdateComment(Comment comment)
+    {
+        _context.Entry(comment).State = EntityState.Modified;
+        await _context.SaveChangesAsync();
+        return comment;
+    }
 
-//     public async Task<bool> DeleteCommentDAO(int id)
-//     {
-//         var CommentDAO = await _context.CommentDAOs.FindAsync(id);
-//         if (CommentDAO == null)
-//             return false;
+    public async Task<bool> DeleteComment(int id)
+    {
+        var Comment = await _context.Comments.FindAsync(id);
+        if (Comment == null)
+            return false;
 
-//         _context.CommentDAOs.Remove(CommentDAO);
-//         await _context.SaveChangesAsync();
-//         return true;
-//     }
-// }
+        _context.Comments.Remove(Comment);
+        await _context.SaveChangesAsync();
+        return true;
+    }
+}

@@ -24,4 +24,13 @@ public partial class Task
     public virtual ICollection<Comment> Comments { get; set; } = new List<Comment>();
 
     public virtual Listing? Listing { get; set; }
+
+    public Task ToTask()
+    {
+        return new Task
+        {
+            Id = Id,
+            Name = Name
+        };
+    }
 }
