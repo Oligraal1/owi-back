@@ -1,23 +1,25 @@
 using System;
 using System.Collections.Generic;
 
-namespace owi_back.Models;
+using owi_back.Models;
+
+namespace owi_back.DTO;
+
 
 public class TaskDTO{
     public int Id { get; set; }
 
     public string Name { get; set; } = null!;
+    public string? Tag { get; set; }
 
-
-
-    public Task ToTask()
+    /*public owi_back.Models.Task ToTask()
     {
-        return new Task
+        return new owi_back.Models.Task
         {
             Id = Id,
-            Name = Name    
-
+            Name = Name,
+            Tag = Tag  
         };
-    }
+    }*/
 
 }

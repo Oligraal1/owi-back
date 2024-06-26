@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj": {}
+    "C:\\IG\\ASP.NET\\ProjetFilRougeBack\\owi-back\\owi-back.csproj": {}
   },
   "projects": {
-    "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj": {
+    "C:\\IG\\ASP.NET\\ProjetFilRougeBack\\owi-back\\owi-back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj",
+        "projectUniqueName": "C:\\IG\\ASP.NET\\ProjetFilRougeBack\\owi-back\\owi-back.csproj",
         "projectName": "owi-back",
-        "projectPath": "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj",
+        "projectPath": "C:\\IG\\ASP.NET\\ProjetFilRougeBack\\owi-back\\owi-back.csproj",
         "packagesPath": "C:\\Users\\ib\\.nuget\\packages\\",
-        "outputPath": "C:\\wamp64\\www\\owi\\owi-back\\obj\\",
+        "outputPath": "C:\\IG\\ASP.NET\\ProjetFilRougeBack\\owi-back\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\ib\\AppData\\Roaming\\NuGet\\NuGet.Config"

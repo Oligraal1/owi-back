@@ -1,3 +1,5 @@
+using owi_back.Context;
+using owi_back.DAO;
 using owi_back.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -5,6 +7,8 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<OwidbContext>();
+builder.Services.AddScoped<TaskDAO>();
+builder.Services.AddScoped<CommentDAO>();
 
 var app = builder.Build();
 
@@ -23,8 +27,6 @@ app.UseRouting();
 
 app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();

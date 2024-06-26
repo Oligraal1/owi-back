@@ -2,6 +2,9 @@ using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using owi_back.Models;
+using owi_back.Context;
+using owi_back.DTO;
+//using owi_back.Mapping;
 
 namespace owi_back.DAO;
 
@@ -20,10 +23,16 @@ public class CommentDAO
         return await _context.Comments.ToListAsync();
     }
 
-    public async Task<Comment> GetCommentDAO(int id)
+    public async Task<Comment> GetComment(int id)
     {
         return await _context.Comments.FindAsync(id);
     }
+//-- avec DTO
+    public async Task<Comment> GetCommentDTO(int id)
+    {
+        return await _context.Comments.FindAsync(id);
+    }
+
 
     public async Task<Comment> AddComment(Comment comment)
     {
@@ -34,7 +43,7 @@ public class CommentDAO
         {
             var task = await _context
                 .Tasks.Include(p => p.Comments)
-                .FirstOrDefaultAsync(p => p.Id == comment.Id);
+                .FirstOrDefaultAsync(p => p.Id == comment.TaskId.Value);
 
             task.Comments.Add(comment);
         }

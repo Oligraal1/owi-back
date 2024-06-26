@@ -1,7 +1,8 @@
 using System;
 using System.Collections.Generic;
+using owi_back.Models;
 
-namespace owi_back.Models;
+namespace owi_back.DTO;
 
 
 public class CommentDTO{
@@ -9,9 +10,10 @@ public class CommentDTO{
     public int Id { get; set; }
 
     public string Content { get; set; } = null!;
+     public int? TaskId { get; set; }       //?
 
 
-   public Comment ToComment()
+   /*public Comment ToComment()
     {
         return new Comment
         {
@@ -19,6 +21,6 @@ public class CommentDTO{
             Content = Content,
             
         };
-    }
+    }*/
 
 }
