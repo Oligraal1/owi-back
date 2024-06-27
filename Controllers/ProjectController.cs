@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using owi_back.Models;
 using owi_back.DAO;
+using owi_back.Context;
 
 namespace owi_back.Controllers
 {
@@ -11,9 +12,9 @@ namespace owi_back.Controllers
     [ApiController]
     public class ProjectsController : ControllerBase
     {
-        private readonly ProjectDAO _projectDAO;
+        private readonly ProjectDao _projectDAO;
 
-        public ProjectsController(ProjectDAO projectDAO)
+        public ProjectsController(ProjectDao projectDAO)
         {
             _projectDAO = projectDAO;
         }

@@ -15,12 +15,12 @@ namespace owi_back.DAO
         {
             _context = context;
         }
-    public async Task<IEnumerable<Project>> GetAllProjects()
+    public async System.Threading.Tasks.Task<IEnumerable<Project>> GetAllProjects()
         {
             return await _context.Projects.ToListAsync();
         }
 
-        public async Task<Project?> GetProjectById(int id)
+        public async System.Threading.Tasks.Task<Project?> GetProjectById(int id)
         {
             if (id <= 0)
             {
@@ -29,7 +29,7 @@ namespace owi_back.DAO
             return await _context.Projects.FindAsync(id);
         }
 
-        public async Task AddProject(Project project)
+        public async System.Threading.Tasks.Task AddProject(Project project)
         {
             if (project == null)
             {
@@ -45,7 +45,7 @@ namespace owi_back.DAO
             await _context.SaveChangesAsync();
         }
 
-        public async Task UpdateProject(Project project)
+        public async System.Threading.Tasks.Task UpdateProject(Project project)
         {
             if (project == null)
             {
@@ -61,7 +61,7 @@ namespace owi_back.DAO
             await _context.SaveChangesAsync();
         }
 
-        public async Task DeleteProjectById(int id)
+        public async System.Threading.Tasks.Task DeleteProjectById(int id)
         {
             if (id <= 0)
             {
