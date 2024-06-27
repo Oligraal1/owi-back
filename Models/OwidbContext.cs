@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using owi_back.Models;
 
-namespace owi_back.Models;
+namespace owi_back.Context;
 
 public partial class OwidbContext : DbContext
 {

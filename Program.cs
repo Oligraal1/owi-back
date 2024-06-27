@@ -9,6 +9,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<OwidbContext>();
 builder.Services.AddScoped<ListingDao>();
+builder.Services.AddScoped<ProjectDao>();
 
 builder.Services.AddSwaggerGen(c =>
 {
