@@ -20,21 +20,16 @@ public class TaskDAO
 
     public async Task<IEnumerable<owi_back.Models.Task>> GetTasks()
     {
-        return await _context.Tasks.Include(t => t.Comments).ToListAsync();
+        return await _context.Tasks.ToListAsync();
     }
 
     public async Task<owi_back.Models.Task> GetTask(int id)
     {
-        // return await _context.Tasks.FindAsync(id);
-        return await _context.Tasks.Include(t => t.Comments).FirstOrDefaultAsync(t => t.Id == id);
+        //return await _context.Tasks.FindAsync(id);
+        return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }
 
-    //-- avec DTO
-    /* public async Task<owi_back.Models.Task> GetTaskDTO(int id)
-     {
-         return await _context.Tasks.FindAsync(id);
-     }*/
-
+    
 
     public async Task<owi_back.Models.Task> AddTask(owi_back.Models.Task task)
     {
