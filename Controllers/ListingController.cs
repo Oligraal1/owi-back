@@ -45,7 +45,7 @@ namespace owi_back.Controllers
         public async Task<ActionResult<Listing>> PostListing(Listing listing)
         {
             await _listingDao.AddAsync(listing);
-            return CreatedAtAction(nameof(GetListing), new { id = listing.Id }, listing);
+            return CreatedAtAction(nameof(GetListing), listing);
         }
 
         // PUT: api/Listing/5
