@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore;
+using owi_back.Models;
 
-namespace owi_back.Models;
+namespace owi_back.Context;
 
 public partial class OwidbContext : DbContext
 {
@@ -21,7 +22,7 @@ public partial class OwidbContext : DbContext
 
     public virtual DbSet<Project> Projects { get; set; }
 
-    public virtual DbSet<Task> Tasks { get; set; }
+    public virtual DbSet<owi_back.Models.Task> Tasks { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 #warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
@@ -96,7 +97,7 @@ public partial class OwidbContext : DbContext
                 .HasColumnName("updated_at");
         });
 
-        modelBuilder.Entity<Task>(entity =>
+        modelBuilder.Entity<owi_back.Models.Task>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("PK__tasks__3213E83F4F170CB5");
 
