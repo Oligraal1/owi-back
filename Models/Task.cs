@@ -26,6 +26,11 @@ public partial class Task
 
     public virtual Listing? Listing { get; set; }
 
+    public Task()
+		{
+			CreatedAt = DateTime.Now;
+		}
+
     /*public TaskDTO TaskToDTO(Task task)
     {
         return new TaskDTO

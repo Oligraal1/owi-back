@@ -18,6 +18,11 @@ public partial class Comment
 
     public virtual Task? Task { get; set; }
 
+    public Comment()
+		{
+			CreatedAt = DateTime.Now;
+		}
+
     /*public CommentDTO ToCommentDTO(Comment comment)
     {
         return new CommentDTO

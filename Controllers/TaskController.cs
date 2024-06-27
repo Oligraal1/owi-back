@@ -46,23 +46,23 @@ public class TaskController : ControllerBase
     // PUT: api/Task/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> PutTask(int id, owi_back.Models.Task Task)
+    public async Task<IActionResult> PutTask(int id, owi_back.Models.Task task)
     {
-        if (id != Task.Id)
+        if (id != task.Id)
         {
             return BadRequest();
         }
 
-        var result = await _DAO.UpdateTask(Task);
+        var result = await _DAO.UpdateTask(task);
         return Ok(result);
     }
 
     // POST: api/Task
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPost("")]
-    public async Task<ActionResult<owi_back.Models.Task>> PostTask(owi_back.Models.Task Task)
+    public async Task<ActionResult<owi_back.Models.Task>> PostTask(owi_back.Models.Task task)
     {
-        var response = await _DAO.AddTask(Task);
+        var response = await _DAO.AddTask(task);
         return Ok(response);
     }
 

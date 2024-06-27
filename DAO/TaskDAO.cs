@@ -19,7 +19,7 @@ public class TaskDAO
 
     public async Task<IEnumerable<owi_back.Models.Task>> GetTasks()
     {
-        return await _context.Tasks.ToListAsync();
+        return await _context.Tasks.Include(t => t.Comments).ToListAsync();
     }
 
     public async Task<owi_back.Models.Task> GetTask(int id)
@@ -39,16 +39,6 @@ public class TaskDAO
     {
         _context.Tasks.Add(task);
         await _context.SaveChangesAsync();
-
-        /*if (task.Id != 0)
-        {
-            var taskToAdd = await _context
-                .Tasks.Include(p => p.Tasks)
-                .FirstOrDefaultAsync(p => p.Id == Task.TaskId.Value);
-
-            taskToAdd.Tasks.Add(Task);
-        }
-        await _context.SaveChangesAsync();*/
 
         return task;
     }

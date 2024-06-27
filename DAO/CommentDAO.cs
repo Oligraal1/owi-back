@@ -27,11 +27,6 @@ public class CommentDAO
     {
         return await _context.Comments.FindAsync(id);
     }
-//-- avec DTO
-    public async Task<Comment> GetCommentDTO(int id)
-    {
-        return await _context.Comments.FindAsync(id);
-    }
 
 
     public async Task<Comment> AddComment(Comment comment)
@@ -39,7 +34,7 @@ public class CommentDAO
         _context.Comments.Add(comment);
         await _context.SaveChangesAsync();
 
-        if (comment.Id != 0)
+        /*if (comment.Id != 0)
         {
             var task = await _context
                 .Tasks.Include(p => p.Comments)
@@ -47,7 +42,7 @@ public class CommentDAO
 
             task.Comments.Add(comment);
         }
-        await _context.SaveChangesAsync();
+        await _context.SaveChangesAsync();*/
 
         return comment;
     }
