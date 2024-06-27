@@ -18,4 +18,9 @@ public partial class Project
     public DateTime? Deadline { get; set; }
 
     public virtual ICollection<Listing> Listings { get; set; } = new List<Listing>();
+
+    public Project()
+    {
+        CreatedAt = DateTime.Now;
+    }
 }

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using owi_back.DTO;
 
 namespace owi_back.Models;
 
@@ -25,12 +26,18 @@ public partial class Task
 
     public virtual Listing? Listing { get; set; }
 
-    public Task ToTask()
+    public Task()
+		{
+			CreatedAt = DateTime.Now;
+		}
+
+    /*public TaskDTO TaskToDTO(Task task)
     {
-        return new Task
+        return new TaskDTO
         {
-            Id = Id,
-            Name = Name
+            Id = task.Id,
+            Name = task.Name,
+            Tag = task.Tag
         };
-    }
+    }*/
 }
