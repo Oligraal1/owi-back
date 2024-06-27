@@ -9,7 +9,7 @@ using owi_back.Models;
 namespace owi_back.Controllers;
 
 [ApiController]
-[Route("api/task")]
+[Route("api/[controller]")]
 public class TaskController : ControllerBase
 {
     private readonly TaskDAO _DAO;
@@ -22,7 +22,7 @@ public class TaskController : ControllerBase
     }
 
     // GET: api/Task
-    [HttpGet]
+    [HttpGet("")]
     public async Task<ActionResult<IEnumerable<owi_back.Models.Task>>> GetTasks()
     {
         var response = await _DAO.GetTasks();
@@ -59,7 +59,7 @@ public class TaskController : ControllerBase
 
     // POST: api/Task
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-    [HttpPost]
+    [HttpPost("")]
     public async Task<ActionResult<owi_back.Models.Task>> PostTask(owi_back.Models.Task Task)
     {
         var response = await _DAO.AddTask(Task);

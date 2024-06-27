@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("owi-back")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+df81a5ac12cae5345a4b722bf54561d5825e6121")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+d9291663bdeb3d32797dc940c63bfdfd15adecbe")]
 [assembly: System.Reflection.AssemblyProductAttribute("owi-back")]
 [assembly: System.Reflection.AssemblyTitleAttribute("owi-back")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

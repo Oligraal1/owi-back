@@ -9,7 +9,7 @@ using owi_back.Models;
 namespace owi_back.Controllers;
 
 [ApiController]
-[Route("api/comment")]
+[Route("api/[controller]")]
 public class CommentController : ControllerBase
 {
     private readonly CommentDAO _DAO;
@@ -22,7 +22,7 @@ public class CommentController : ControllerBase
     }
 
     // GET: api/Comment
-    [HttpGet]
+    [HttpGet("")]
     public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
     {
         var response = await _DAO.GetComments();

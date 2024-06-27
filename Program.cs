@@ -1,5 +1,6 @@
 using owi_back.Context;
 using owi_back.DAO;
+using owi_back.Mapping;
 using owi_back.Models;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -9,6 +10,7 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<OwidbContext>();
 builder.Services.AddScoped<TaskDAO>();
 builder.Services.AddScoped<CommentDAO>();
+builder.Services.AddScoped<Mapper>();
 
 var app = builder.Build();
 
