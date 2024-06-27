@@ -16,14 +16,18 @@ namespace owi_back.DAO
             _context = context;
         }
 
-        public async System.Threading.Tasks.Task<IEnumerable<Listing>> GetAllAsync()
+        // Récupérer tous les listings pour un projet spécifique
+        public async Task<IEnumerable<Listing>> GetAllByProjectIdAsync(int projectId)
         {
-            return await _context.Listings.ToListAsync();
+            return await _context.Listings
+                                 .Where(listing => listing.ProjectId == projectId)
+                                 .ToListAsync();
         }
 
-        public async System.Threading.Tasks.Task<Listing> GetByIdAsync(int id)
+        // Récupérer un listing par son Id et par le projet auquel il appartient
+        public async Task<Listing> GetByIdAndProjectIdAsync(int id, int projectId)
         {
-            return await _context.Listings.FindAsync(id);
+            return await _context.Listings.FirstOrDefaultAsync(listing => listing.Id == id && listing.ProjectId == projectId);
         }
 
         public async System.Threading.Tasks.Task AddAsync(Listing listing)
@@ -46,6 +50,6 @@ namespace owi_back.DAO
                 _context.Listings.Remove(listing);
                 await _context.SaveChangesAsync();
             }
+        }
     }
-}
 }
