@@ -18,19 +18,19 @@ namespace owi_back.Controllers
             _listingDao = listingDao;
         }
 
-        // GET: api/Listing
-        [HttpGet("")]
-        public async Task<ActionResult<IEnumerable<Listing>>> GetListings()
+        // GET: api/Listing/1
+        [HttpGet("{projectId}")]
+        public async Task<ActionResult<IEnumerable<Listing>>> GetListingsByProjectId(int projectId)
         {
-            var listings = await _listingDao.GetAllAsync();
+            var listings = await _listingDao.GetAllByProjectIdAsync(projectId);
             return Ok(listings);
         }
 
-        // GET: api/Listing/5
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Listing>> GetListing(int id)
+         // GET: api/Listing/5/1
+        [HttpGet("{id}/{projectId}")]
+        public async Task<ActionResult<Listing>> GetListingByIdAndProjectId(int id, int projectId)
         {
-            var listing = await _listingDao.GetByIdAsync(id);
+            var listing = await _listingDao.GetByIdAndProjectIdAsync(id, projectId);
 
             if (listing == null)
             {
@@ -45,7 +45,7 @@ namespace owi_back.Controllers
         public async Task<ActionResult<Listing>> PostListing(Listing listing)
         {
             await _listingDao.AddAsync(listing);
-            return CreatedAtAction(nameof(GetListing), new { id = listing.Id }, listing);
+            return CreatedAtAction(nameof(GetListingByIdAndProjectId), new { id = listing.Id, projectId = listing.ProjectId }, listing);
         }
 
         // PUT: api/Listing/5
@@ -63,7 +63,7 @@ namespace owi_back.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (await _listingDao.GetByIdAsync(id) == null)
+                if (await _listingDao.GetByIdAndProjectIdAsync(id, (int)listing.ProjectId) == null)
                 {
                     return NotFound();
                 }
@@ -78,9 +78,9 @@ namespace owi_back.Controllers
 
         // DELETE: api/Listing/5
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteListing(int id)
+        public async Task<IActionResult> DeleteListing(int id, int projectId)
         {
-            var listing = await _listingDao.GetByIdAsync(id);
+            var listing = await _listingDao.GetByIdAndProjectIdAsync(id, projectId);
             if (listing == null)
             {
                 return NotFound();

@@ -2,9 +2,7 @@ using owi_back.Context;
 using owi_back.DAO;
 using owi_back.Mapping;
 using owi_back.Models;
-using owi_back.DAO;
 using Microsoft.OpenApi.Models;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -17,9 +15,18 @@ builder.Services.AddScoped<Mapper>();
 builder.Services.AddScoped<ListingDao>();
 builder.Services.AddScoped<ProjectDao>();
 
+// Configure CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowSpecificOrigin",
+        builder => builder.WithOrigins("http://localhost:4200")
+                          .AllowAnyMethod()
+                          .AllowAnyHeader());
+});
+
 builder.Services.AddSwaggerGen(c =>
 {
-   c.SwaggerDoc("v1", new() { Title = "Owi Api", Version = "v1" });
+   c.SwaggerDoc("v1", new OpenApiInfo { Title = "Owi Api", Version = "v1" });
 });
 
 var app = builder.Build();
@@ -35,8 +42,8 @@ if (!app.Environment.IsDevelopment())
 if (builder.Environment.IsDevelopment())
 {
     app.UseDeveloperExceptionPage();
-        app.UseSwagger();
-       app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Owi Api v1"));
+    app.UseSwagger();
+    app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Owi Api v1"));
 }
 
 app.UseHttpsRedirection();
@@ -44,8 +51,13 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+// Use the CORS policy
+app.UseCors("AllowSpecificOrigin");
+
 app.UseAuthorization();
 
-app.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+app.MapControllerRoute(
+    name: "default",
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.Run();
