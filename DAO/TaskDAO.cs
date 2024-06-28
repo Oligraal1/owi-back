@@ -1,10 +1,11 @@
-using System.Linq;
 using System.Diagnostics;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using owi_back.Context;
 using owi_back.DTO;
 using owi_back.Models;
+
 //using owi_back.Mapping;
 
 namespace owi_back.DAO;
@@ -28,8 +29,6 @@ public class TaskDAO
         //return await _context.Tasks.FindAsync(id);
         return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }
-
-    
 
     public async Task<owi_back.Models.Task> AddTask(owi_back.Models.Task task)
     {
