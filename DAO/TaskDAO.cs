@@ -30,6 +30,13 @@ public class TaskDAO
         return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }
 
+    public async Task<IEnumerable<owi_back.Models.Task>> GetTasksByListingId(int listingId)
+        {
+            return await _context.Tasks
+                .Where(t => t.ListingId == listingId)
+                .ToListAsync();
+        }
+
     public async Task<owi_back.Models.Task> AddTask(owi_back.Models.Task task)
     {
         _context.Tasks.Add(task);

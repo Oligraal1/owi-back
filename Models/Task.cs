@@ -18,7 +18,7 @@ public partial class Task
 
     public string? Tag { get; set; }
 
-    public int? ListingId { get; set; }
+    public int ListingId { get; set; }
 
     public DateTime? Deadline { get; set; }
 

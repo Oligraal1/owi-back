@@ -44,8 +44,22 @@ namespace owi_back.Controllers
         [HttpPost("")]
         public async Task<ActionResult<Listing>> PostListing(Listing listing)
         {
-            await _listingDao.AddAsync(listing);
+             try
+    {
+        // _context.Listings.Add(listing);
+        // await _context.SaveChangesAsync();
+        await _listingDao.AddAsync(listing);
             return CreatedAtAction(nameof(GetListingByIdAndProjectId), new { id = listing.Id, projectId = listing.ProjectId }, listing);
+    }
+    catch (Exception ex)
+    {
+        // Log exception details
+        // This can be replaced with your logging framework of choice
+        Console.WriteLine($"Error adding listing: {ex.Message}");
+        Console.WriteLine(ex.StackTrace);
+        throw; // Re-throw the exception to ensure it's not swallowed
+    }
+            
         }
 
         // PUT: api/Listing/5

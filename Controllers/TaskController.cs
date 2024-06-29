@@ -43,6 +43,19 @@ public class TaskController : ControllerBase
         return Ok(_mapper.TaskToDTO(task));
     }
 
+    // GET: api/Task/Listing/5
+        [HttpGet("Listing/{listingId}")]
+        public async Task<ActionResult<IEnumerable<owi_back.Models.Task>>> GetTasksByListingId(int listingId)
+        {
+            var tasks = await _DAO.GetTasksByListingId(listingId);
+            if (tasks == null || !tasks.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(tasks);
+        }
+
     // PUT: api/Task/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
