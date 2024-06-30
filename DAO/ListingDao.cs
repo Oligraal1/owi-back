@@ -24,6 +24,11 @@ namespace owi_back.DAO
                                  .ToListAsync();
         }
 
+        public async Task<Listing> GetByIdAsync(int id)
+        {
+            return await _context.Listings.FirstOrDefaultAsync(listing => listing.Id == id);
+        }
+
         // Récupérer un listing par son Id et par le projet auquel il appartient
         public async Task<Listing> GetByIdAndProjectIdAsync(int id, int projectId)
         {

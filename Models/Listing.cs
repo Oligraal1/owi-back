@@ -16,4 +16,9 @@ public partial class Listing
     public virtual Project? Project { get; set; }
 
     public virtual ICollection<Task> Tasks { get; set; } = new List<Task>();
+
+    public Listing()
+    {
+        CreatedAt = DateTime.Now;
+    }
 }

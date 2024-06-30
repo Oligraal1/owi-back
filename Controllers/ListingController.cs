@@ -44,21 +44,21 @@ namespace owi_back.Controllers
         [HttpPost("")]
         public async Task<ActionResult<Listing>> PostListing(Listing listing)
         {
-             try
-    {
-        // _context.Listings.Add(listing);
-        // await _context.SaveChangesAsync();
-        await _listingDao.AddAsync(listing);
-            return CreatedAtAction(nameof(GetListingByIdAndProjectId), new { id = listing.Id, projectId = listing.ProjectId }, listing);
-    }
-    catch (Exception ex)
-    {
-        // Log exception details
-        // This can be replaced with your logging framework of choice
-        Console.WriteLine($"Error adding listing: {ex.Message}");
-        Console.WriteLine(ex.StackTrace);
-        throw; // Re-throw the exception to ensure it's not swallowed
-    }
+            try
+            {
+                // _context.Listings.Add(listing);
+                // await _context.SaveChangesAsync();
+                await _listingDao.AddAsync(listing);
+                return CreatedAtAction(nameof(GetListingByIdAndProjectId), new { id = listing.Id, projectId = listing.ProjectId }, listing);
+            }
+            catch (Exception ex)
+            {
+                // Log exception details
+                // This can be replaced with your logging framework of choice
+                Console.WriteLine($"Error adding listing: {ex.Message}");
+                Console.WriteLine(ex.StackTrace);
+                throw; // Re-throw the exception to ensure it's not swallowed
+            }
             
         }
 
@@ -70,31 +70,16 @@ namespace owi_back.Controllers
             {
                 return BadRequest();
             }
-
-            try
-            {
-                await _listingDao.UpdateAsync(listing);
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (await _listingDao.GetByIdAndProjectIdAsync(id, (int)listing.ProjectId) == null)
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return NoContent();
+               await _listingDao.UpdateAsync(listing);
+               return NoContent();
+            
         }
 
-        // DELETE: api/Listing/5
+        // DELETE: api/Listing/5/2
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteListing(int id, int projectId)
+        public async Task<IActionResult> DeleteListing(int id)
         {
-            var listing = await _listingDao.GetByIdAndProjectIdAsync(id, projectId);
+            var listing = await _listingDao.GetByIdAsync(id);
             if (listing == null)
             {
                 return NotFound();

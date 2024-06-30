@@ -128,6 +128,11 @@ public partial class OwidbContext : DbContext
                 .HasForeignKey(d => d.ListingId)
                 .HasConstraintName("tasks_listing_id_foreign");
         });
+        modelBuilder.Entity<owi_back.Models.Task>()
+    .HasOne(t => t.Listing)
+    .WithMany(l => l.Tasks)
+    .HasForeignKey(t => t.ListingId)
+    .OnDelete(DeleteBehavior.Cascade);
 
         OnModelCreatingPartial(modelBuilder);
     }
