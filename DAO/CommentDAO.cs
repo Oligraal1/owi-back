@@ -16,10 +16,12 @@ public class CommentDAO
     {
         _context = context;
     }
-
+///
     public async Task<IEnumerable<Comment>> GetComments(int taskId)
     {
-        return await _context.Comments.Where(comment => comment.TaskId == taskId).ToListAsync();
+        return await _context.Comments
+                .Where(comment =>comment.TaskId == taskId)
+                .ToListAsync();
     }
 
     public async Task<Comment> GetComment(int id, int taskId)
@@ -29,51 +31,19 @@ public class CommentDAO
 
     public async Task<Comment> AddComment(Comment comment)
     {
-        if (comment.TaskId != null)
-        {
-            var task = await _context
-                .Tasks.Include(t => t.Comments)
-                .FirstOrDefaultAsync(t => t.Id == comment.TaskId);
-
-            if (task != null)
-            {
-                task.Comments.Add(comment);
-            }
-            else
-            {
-                throw new Exception("Task not found.");
-            }
-        }
-        else
-        {
-            _context.Comments.Add(comment);
-        }
-
+        _context.Comments.Add(comment);
         await _context.SaveChangesAsync();
 
         return comment;
     }
-
     public async Task<Comment> UpdateComment(Comment comment)
     {
-        /* _context.Entry(comment).State = EntityState.Modified;
+         _context.Entry(comment).State = EntityState.Modified;
          await _context.SaveChangesAsync();
-         return comment;*/
-        var existingComment = await _context.Comments.FindAsync(comment.Id);
-        if (existingComment == null)
-        {
-            throw new Exception("Comment not found.");
-        }
-
-        existingComment.Content = comment.Content;
-        existingComment.TaskId = comment.TaskId;
-
-        _context.Entry(existingComment).State = EntityState.Modified;
-        await _context.SaveChangesAsync();
-        return existingComment;
+         return comment;
     }
 
-    public async Task<bool> DeleteComment(int id)
+    public async Task<bool> DeleteCommentById(int id)
     {
         var comment = await _context.Comments.FindAsync(id);
         if (comment == null)
@@ -84,4 +54,5 @@ public class CommentDAO
         await _context.SaveChangesAsync();
         return true;
     }
+
 }

@@ -23,11 +23,11 @@ public class TaskController : ControllerBase
 
     // GET: api/Task
     [HttpGet("")]
-    public async Task<ActionResult<IEnumerable<owi_back.Models.Task>>> GetTasks()
+    public async Task<ActionResult<IEnumerable<owi_back.Models.Task>>> GetTasks(int listingId)
     {
         /*var response = await _DAO.GetTasks();
         return Ok(response);*/
-        var tasks = await _DAO.GetTasks();
+        var tasks = await _DAO.GetTasks(listingId);
         return Ok(tasks.Select(t => _mapper.TaskToDTO(t)));
     }
 
@@ -44,20 +44,6 @@ public class TaskController : ControllerBase
         }
         return Ok(_mapper.TaskToDTO(task));
     }
-
-    /*[HttpGet("{id}/{projectId}")]
-        public async Task<ActionResult<Listing>> GetListingByIdAndProjectId(int id, int projectId)
-        {
-            var listing = await _listingDao.GetByIdAndProjectIdAsync(id, projectId);
-
-            if (listing == null)
-            {
-                return NotFound();
-            }
-
-            return Ok(listing);
-        }*/
-
 
     // PUT: api/Task/5
 
@@ -134,8 +120,6 @@ public class TaskController : ControllerBase
                 .Comments?.Select(c => new Comment { Content = c.Content, TaskId = c.TaskId })
                 .ToList()
         };
-
-
         var createdTask = await _DAO.AddTask(task);
         return CreatedAtAction(
             nameof(GetTaskById),
@@ -145,7 +129,7 @@ public class TaskController : ControllerBase
     }
 
     // DELETE: api/Task/5
-   /* [HttpDelete("{id}")]
+   [HttpDelete("{id}")]
     public async Task<IActionResult> DeleteTask(int id)
     {
         if (id <= 0)
@@ -153,25 +137,15 @@ public class TaskController : ControllerBase
             throw new ArgumentException("ID incorrect", nameof(id));
         }
 
-        var response = await _DAO.DeleteTask(id);
+        var response = await _DAO.DeleteTaskById(id);
         return Ok(response);
-    }*/
-
- [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteListing(int id, int projectId)
-        {
-            var listing = await _DAO.GetTask(id, projectId);
-            if (listing == null)
-            {
-                return NotFound();
-            }
-
-            await _DAO.DeleteAsync(id);
-            return NoContent();
-        }
-
-
-
+    }
 
 
 }
+
+
+
+
+
+

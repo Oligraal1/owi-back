@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using owi_back.DAO_DAO;
 using owi_back.DAO;
 using owi_back.DTO;
 using owi_back.Mapping;
@@ -22,35 +21,30 @@ public class CommentController : ControllerBase
     }
 
     // GET: api/Comment
-    /*[HttpGet]
-    public async Task<ActionResult<IEnumerable<Comment>>> GetComments()
+    [HttpGet]
+    public async Task<ActionResult<IEnumerable<Comment>>> GetCommentsByTask(int taskId)
     {
-        var response = await _DAO.GetComments();
-        return Ok(response);*/
-
-    [HttpGet("task/{taskId}")]
-    public async Task<ActionResult<IEnumerable<CommentDTO>>> GetComments(int taskId)
-    {
-        var comments = await _DAO.GetComments(taskId);
-        return Ok(comments.Select(c => _mapper.CommentToDTO(c)));
+        var response = await _DAO.GetComments(taskId);
+        return Ok(response.Select(t =>_mapper.CommentToDTO(t)));
     }
 
-    // GET: api/Comment/5
-    [HttpGet("{id}")]
-    public async Task<ActionResult<CommentDTO>> GetComment(int id, int taskId)
+    [HttpGet("id/{taskId}")]
+    public async Task<ActionResult<IEnumerable<CommentDTO>>> GetCommentById(int id,int taskId)
     {
-        var comment = await _DAO.GetComment(id, taskId);
-        if (comment == null)
+        var comments = await _DAO.GetComment(id,taskId);
+        if (comments == null)
         {
             return NotFound();
         }
-        return Ok(_mapper.CommentToDTO(comment));
+        return Ok(_mapper.CommentToDTO(comments));
     }
+
+
 
     // PUT: api/Comment/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]
-    public async Task<IActionResult> CreatComment(int id, CommentDTO commentDTO)
+    public async Task<IActionResult> UpdateComment(int id, CommentDTO commentDTO)
     {
         if (id != commentDTO.Id)
         {
@@ -81,77 +75,38 @@ public class CommentController : ControllerBase
         }
 
         return NoContent();
-
-        // POST: api/Comment
-        // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
-        /*[HttpPost]
-        public async Task<ActionResult<Comment>> PostComment(Comment Comment)
-        {
-            var response = await _DAO.AddComment(Comment);
-            return Ok(response);
-        }*/
+    }
 
         [HttpPost]
          public async Task<ActionResult<CommentDTO>> CreateComment(CommentDTO commentDTO)
         {
-            var comment = new Comment { Content = commentDTO.Content, TaskId = commentDTO.TaskId };
+            var comment = new Comment { 
+                Content = commentDTO.Content,
+                TaskId = commentDTO.TaskId
+             };
 
             var createdComment = await _DAO.AddComment(comment);
             return CreatedAtAction(
-                nameof(GetComment),
-                new { id = createdComment.Id, taskId = createdComment.TaskId },
+                nameof(GetCommentById),
+                new {
+                     id = createdComment.Id,
+                     taskId = createdComment.TaskId
+                     },
                 _mapper.CommentToDTO(createdComment)
             );
         }
 
-        // DELETE: api/Comment/5
+       
         [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteComment(int id)
+        public async Task<IActionResult> DeleteTask(int id)
         {
-            try
+            if (id <= 0)
             {
-                var deleted = await _DAO.DeleteComment(id);
-                if (!deleted)
-                {
-                    return NotFound();
-                }
-
-                return NoContent();
-            }
-            catch (Exception ex)
-            {
-                // Log the exception (ex) here if necessary
-                return StatusCode(500, "Internal server error");
-            }        
-            
-        }
-
-
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteListing(int id, int projectId)
-        {
-            var listing = await _listingDao.GetByIdAndProjectIdAsync(id, projectId);
-            if (listing == null)
-            {
-                return NotFound();
+                throw new ArgumentException("ID incorrect", nameof(id));
             }
 
-            await _listingDao.DeleteAsync(id);
-            return NoContent();
+            var response = await _DAO.DeleteCommentById(id);
+            return Ok(response);
         }
-
-
-        /*[HttpDelete("{id}")]
-    public async Task<IActionResult> DeleteTask(int id)
-    {
-        if (id <= 0)
-        {
-            throw new ArgumentException("ID incorrect", nameof(id));
-        }
-
-        var response = await _DAO.DeleteTask(id);
-        return Ok(response);
-    }*/
 
     }
-}

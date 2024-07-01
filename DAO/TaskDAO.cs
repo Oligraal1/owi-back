@@ -17,16 +17,21 @@ public class TaskDAO
         _context = context;
     }
 
-    public async Task<IEnumerable<owi_back.Models.Task>> GetTasks()
+    public async Task<IEnumerable<owi_back.Models.Task>> GetTasks(int listingId)
     {
-        return await _context.Tasks.Include(t => t.Comments).ToListAsync();
+        return await _context
+            .Tasks.Include(t => t.Comments)
+            .Where(t => t.ListingId == listingId)
+            .ToListAsync();
     }
 
     public async Task<owi_back.Models.Task> GetTask(int id, int listingId)
     {
         //return await _context.Tasks.Include(t => t.Comments).FirstOrDefaultAsync(t => t.Id == id);
 
-        return await _context.Tasks.FirstOrDefaultAsync(task => task.Id == id && task.ListingId == listingId);
+        return await _context.Tasks.FirstOrDefaultAsync(task =>
+            task.Id == id && task.ListingId == listingId
+        );
         //return await _context.Tasks.FirstOrDefaultAsync(t => t.Id == id);
     }
 
@@ -57,7 +62,7 @@ public class TaskDAO
         return existingTask;
     }
 
-    /*public async Task<bool> DeleteTask(int id)
+    public async Task<bool> DeleteTaskById(int id)
     {
         var task = await _context.Tasks.FindAsync(id);
         if (task == null)
@@ -67,16 +72,5 @@ public class TaskDAO
         _context.Tasks.Remove(task);
         await _context.SaveChangesAsync();
         return true;
-    }*/
-
-    public async System.Threading.Tasks.Task DeleteAsync(int id)
-        {
-            var task = await _context.Tasks.FindAsync(id);
-            if (task != null)
-            {
-                _context.Tasks.Remove(task);
-                await _context.SaveChangesAsync();
-            }
-        }
-
+    }
 }
