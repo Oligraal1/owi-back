@@ -41,6 +41,18 @@ public class CommentController : ControllerBase
         return Ok(_mapper.CommentToDTO(comment));
     }
 
+    // GET: api/Comment/Task/5
+    [HttpGet("Task/{taskId}/{listingId}")]
+    public async Task<ActionResult<IEnumerable<CommentDTO>>> GetCommentByTaskIdAndListingId(int taskId, int listingId)
+    {
+        var comments = await _DAO.GetCommentsByTaskId(taskId, listingId);
+        if (comments == null || !comments.Any())
+        {
+            return NotFound();
+        }
+        return Ok(comments);
+    }
+
     // PUT: api/Comment/5
     // To protect from overposting attacks, see https://go.microsoft.com/fwlink/?linkid=2123754
     [HttpPut("{id}")]

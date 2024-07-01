@@ -28,6 +28,12 @@ public class CommentDAO
         return await _context.Comments.FindAsync(id);
     }
 
+    public async Task<IEnumerable<Comment>> GetCommentsByTaskId(int taskId, int listingId)
+    {
+        return await _context.Comments
+            .Where(c => c.TaskId == taskId && c.Task.ListingId == listingId)
+            .ToListAsync();
+    }
 
     public async Task<Comment> AddComment(Comment comment)
     {
