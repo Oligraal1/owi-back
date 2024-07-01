@@ -13,8 +13,15 @@ public class Mapper
         {
             Id = task.Id,
             Name = task.Name,
-            Tag = task.Tag  
-            
+            Tag = task.Tag,
+            Comments = task
+                .Comments?.Select(c => new CommentDTO
+                {
+                    Id = c.Id,
+                    Content = c.Content,
+                    TaskId = c.TaskId
+                })
+                .ToList()
         };
     }
 

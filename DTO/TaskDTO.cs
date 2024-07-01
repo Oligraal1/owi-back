@@ -11,6 +11,6 @@ public class TaskDTO{
 
     public string Name { get; set; } = null!;
     public string? Tag { get; set; }
-
+    public List<CommentDTO> Comments { get; set; }
     
 }
