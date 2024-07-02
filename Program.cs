@@ -18,10 +18,10 @@ builder.Services.AddScoped<ProjectDao>();
 // Configure CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("https://owi-back.azurewebsites.net")
-                          .AllowAnyMethod()
-                          .AllowAnyHeader());
+    options.AddDefaultPolicy(builder =>
+    {
+        builder.WithOrigins("*").AllowAnyHeader().AllowAnyMethod();
+    });
 });
 
 builder.Services.AddSwaggerGen(c =>
@@ -52,7 +52,7 @@ app.UseStaticFiles();
 app.UseRouting();
 
 // Use the CORS policy
-app.UseCors("AllowSpecificOrigin");
+app.UseCors();
 
 app.UseAuthorization();
 
