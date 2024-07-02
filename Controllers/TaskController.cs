@@ -48,7 +48,7 @@ public class TaskController : ControllerBase
         public async Task<ActionResult<IEnumerable<owi_back.Models.Task>>> GetTasksByListingId(int listingId)
         {
             var tasks = await _DAO.GetTasksByListingId(listingId);
-            if (tasks == null || !tasks.Any())
+            if (tasks == null)
             {
                 return NotFound();
             }

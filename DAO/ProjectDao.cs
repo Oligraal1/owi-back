@@ -15,7 +15,7 @@ namespace owi_back.DAO
         {
             _context = context;
         }
-    public async System.Threading.Tasks.Task<IEnumerable<Project>> GetAllProjects()
+        public async System.Threading.Tasks.Task<IEnumerable<Project>> GetAllProjects()
         {
             return await _context.Projects.ToListAsync();
         }
