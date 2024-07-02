@@ -6,7 +6,7 @@ name: Build and deploy ASP.Net Core app to Azure Web App - owi-back
 on:
   push:
     branches:
-      - master
+      - newbra
   workflow_dispatch:
 
 jobs:
