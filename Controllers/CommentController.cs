@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using owi_back.Context;
 using owi_back.DAO;
 using owi_back.DTO;
