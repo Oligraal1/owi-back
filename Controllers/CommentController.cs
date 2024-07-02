@@ -46,7 +46,7 @@ public class CommentController : ControllerBase
     public async Task<ActionResult<IEnumerable<CommentDTO>>> GetCommentByTaskIdAndListingId(int taskId, int listingId)
     {
         var comments = await _DAO.GetCommentsByTaskId(taskId, listingId);
-        if (comments == null || !comments.Any())
+        if (comments == null)
         {
             return NotFound();
         }
