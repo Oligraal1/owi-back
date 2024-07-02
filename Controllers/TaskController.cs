@@ -40,7 +40,7 @@ public class TaskController : ControllerBase
         {
             return NotFound();
         }
-        return Ok(_mapper.TaskToDTO(task));
+        return Ok(task);
     }
 
     // GET: api/Task/Listing/5

@@ -42,10 +42,23 @@ public class CommentController : ControllerBase
     }
 
     // GET: api/Comment/Task/5
+    [HttpGet("Task/{taskId}")]
+    public async Task<ActionResult<IEnumerable<CommentDTO>>> GetCommentByTaskIdAndListingId(int taskId)
+    {
+        var comments = await _DAO.GetCommentsByTaskId(taskId);
+        if (comments == null)
+        {
+            return NotFound();
+        }
+        return Ok(comments);
+    }
+
+
+    // GET: api/Comment/Task/5
     [HttpGet("Task/{taskId}/{listingId}")]
     public async Task<ActionResult<IEnumerable<CommentDTO>>> GetCommentByTaskIdAndListingId(int taskId, int listingId)
     {
-        var comments = await _DAO.GetCommentsByTaskId(taskId, listingId);
+        var comments = await _DAO.GetCommentsByTaskAndListingId(taskId, listingId);
         if (comments == null)
         {
             return NotFound();
