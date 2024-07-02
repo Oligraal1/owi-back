@@ -19,7 +19,7 @@ builder.Services.AddScoped<ProjectDao>();
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowSpecificOrigin",
-        builder => builder.WithOrigins("http://localhost:4200")
+        builder => builder.WithOrigins("https://owi-back.azurewebsites.net")
                           .AllowAnyMethod()
                           .AllowAnyHeader());
 });
