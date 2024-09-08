@@ -1,25 +1,32 @@
 {
   "format": 1,
   "restore": {
-    "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj": {}
+    "D:\\Cours_Dév.NET_ibCegos\\Projet FilRouge-OWI\\Clone owi\\OWI_final_Olivia\\owi-back\\owi-back.csproj": {}
   },
   "projects": {
-    "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj": {
+    "D:\\Cours_Dév.NET_ibCegos\\Projet FilRouge-OWI\\Clone owi\\OWI_final_Olivia\\owi-back\\owi-back.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj",
+        "projectUniqueName": "D:\\Cours_Dév.NET_ibCegos\\Projet FilRouge-OWI\\Clone owi\\OWI_final_Olivia\\owi-back\\owi-back.csproj",
         "projectName": "owi-back",
-        "projectPath": "C:\\wamp64\\www\\owi\\owi-back\\owi-back.csproj",
-        "packagesPath": "C:\\Users\\ib\\.nuget\\packages\\",
-        "outputPath": "C:\\wamp64\\www\\owi\\owi-back\\obj\\",
+        "projectPath": "D:\\Cours_Dév.NET_ibCegos\\Projet FilRouge-OWI\\Clone owi\\OWI_final_Olivia\\owi-back\\owi-back.csproj",
+        "packagesPath": "C:\\Users\\guery\\.nuget\\packages\\",
+        "outputPath": "D:\\Cours_Dév.NET_ibCegos\\Projet FilRouge-OWI\\Clone owi\\OWI_final_Olivia\\owi-back\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
+        ],
         "configFilePaths": [
-          "C:\\Users\\ib\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\guery\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -99,7 +106,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.301/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.303/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
